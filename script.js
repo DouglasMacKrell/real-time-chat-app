@@ -16,10 +16,14 @@ socket.on("user-connected", (userName) => {
   appendMessage(`${userName} has connected`);
 });
 
+socket.on("user-disconnected", (userName) => {
+  appendMessage(`${userName} has disconnected`);
+});
+
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value 
-    appendMessage(`YOU: ${message}`)
+    appendMessage(`You: ${message}`)
     socket.emit('send-chat-message', message) 
     messageInput.value = ''
 })
