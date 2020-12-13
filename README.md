@@ -23,6 +23,7 @@ This web app uses socket.io to connect users and allow them to text one another 
 
 ## FUTURE FEATURES
 
+* CSS Styling
 * Implementation of multiple rooms
 * Private/Public rooms
 
