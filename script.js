@@ -9,7 +9,7 @@ appendMessage('You joined the room')
 socket.emit('new-user', userName)
 
 socket.on('chat-message', data => {
-    appendMessage(data)
+    appendMessage(`${data.name}: ${data.message}`)
 })
 
 socket.on("user-connected", (userName) => {
@@ -19,6 +19,7 @@ socket.on("user-connected", (userName) => {
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value 
+    appendMessage(`YOU: ${message}`)
     socket.emit('send-chat-message', message) 
     messageInput.value = ''
 })
