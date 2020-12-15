@@ -45,11 +45,11 @@ io.on('connection', socket => {
         socket.to(room).broadcast.emit('user-connected', userName)
     })
     socket.on('send-chat-message', (room, message) => {
-        socket.to(room).broadcast.emit('chat-message', { message: message, name: users[socket.id] })
+        socket.to(room).broadcast.emit('chat-message', { message: message, name: rooms[room].users[socket.id] })
     })
     socket.on('disconnect', () => {
       getUserRooms(socket).forEach(room => {
-        socket.to(room).broadcast.emit('user-disconnected', users[socket.id])
+        socket.to(room).broadcast.emit('user-disconnected', rooms[room].users[socket.id])
         delete rooms[room].users[socket.id]
       })
     })
