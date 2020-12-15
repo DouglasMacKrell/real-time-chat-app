@@ -10,6 +10,17 @@ const io = require('socket.io')(server, {
 app.set('views', './views')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+
+const rooms = {}
+
+app.get('/', (req, res) => {
+  res.render('index', { rooms: rooms })
+})
+
+app.get('/:room', (req, res) => {
+  res.render('room', { roomName: req.params.room })
+})
 
 const users = {}
 
