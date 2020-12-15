@@ -15,6 +15,7 @@ This web app uses socket.io to connect users and allow them to text one another 
 ## FEATURES
 
 * Connects users over local network
+* Allows users create a new chat room or join an existing one
 * Prompts users for their username, and stores those usernames in the server
 * Informs users that they have joined the room
 * Broadcasts sent text to all users in the room save for the broadcaster
@@ -24,8 +25,7 @@ This web app uses socket.io to connect users and allow them to text one another 
 ## FUTURE FEATURES
 
 * CSS Styling
-* Implementation of multiple rooms
-* Private/Public rooms
+* Deployment
 
 ## TECHNICAL MILESTONES
 
@@ -38,6 +38,8 @@ This web app uses socket.io to connect users and allow them to text one another 
 * **JavaScript**
 * **HTML5**
 * **Node**
+* **Express**
+* **ejs**
 * **Socket.io**
 
 ## LOCAL SETUP
@@ -58,13 +60,19 @@ You can check to see if you already have Node.js by typing `node -v` in your ter
 
        `npm run devStart`
 
-4. Open the `index.html` file with a Live Server (VS Code is an easy way to do this), and you will be prompted to enter a screen name. After a name is entered, the app will let you know that you have joined the room. Connect a second user by visiting the same Live Server in a separate browser window. You will again be prompted to enter a screen name. You can enter the same name without conflict - but by using a different screen name you can better see how this demo operates.
+4. Open `http://localhost:3000` in a new browser window.
 
-5. To disconnect from the chat, simply close the browser window. All other connected users will receive a disconnection notification instantly.
+5. Enter a room name to create a new room. This user will automatically join the room they create. 
 
-6. Currently, the app is only designed to run locally on the same network.
+6. Open `http://localhost:3000` in a separate browser window. You should be able to see the room you've created in step 5. Click the link to join that room.
 
-7. If that is not the case check the terminals output for errors, if you are unable to troubleshoot the problem, I would be happy to address issues so open [one](/issues)
+7. Once you enter the room, you will be prompted to enter a user name. After one has been entered, a notification will be broadcast to all users in the same room. 
+
+8. To disconnect from the chat, simply close the browser window. All other connected users will receive a disconnection notification instantly.
+
+9. Currently, the app is only designed to run locally on the same network.
+
+10. If that is not the case check the terminals output for errors, if you are unable to troubleshoot the problem, I would be happy to address issues so open [one](/issues)
 
 ---
 
