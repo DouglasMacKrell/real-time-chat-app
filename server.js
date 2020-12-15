@@ -1,3 +1,4 @@
+const { name } = require('ejs')
 const express = require('express')
 const app = express()
 const server = require('http').Server(app)
@@ -12,7 +13,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
-const rooms = { name: {} }
+const rooms = {  }
 
 app.get('/', (req, res) => {
   res.render('index', { rooms: rooms })
@@ -37,18 +38,26 @@ app.get('/:room', (req, res) => {
 
 server.listen(3000)
 
-const users = {}
-
 io.on('connection', socket => {
-    socket.on('new-user', userName => {
-        users[socket.id] = userName
-        socket.broadcast.emit('user-connected', userName)
+    socket.on('new-user', (room, userName) => {
+        socket.join(room)
+        rooms[room].users[socket.id] = userName
+        socket.to(room).broadcast.emit('user-connected', userName)
     })
-    socket.on('send-chat-message', message => {
-        socket.broadcast.emit('chat-message', { message: message, name: users[socket.id] })
+    socket.on('send-chat-message', (room, message) => {
+        socket.to(room).broadcast.emit('chat-message', { message: message, name: users[socket.id] })
     })
     socket.on('disconnect', () => {
+      getUserRooms(socket).forEach(room => {
         socket.broadcast.emit('user-disconnected', users[socket.id])
-        delete users[socket.id]
+        delete rooms[room].users[socket.id]
+      })
     })
 })
+
+function getUserRooms(socket) {
+  return Object.entries(rooms).reduce((names, [name, room]) => {
+    if (room.users[socket.id] != null) names.push(name)
+    return names
+  }, [])
+}

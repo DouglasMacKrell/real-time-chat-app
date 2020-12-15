@@ -8,13 +8,13 @@ const messageInput = document.getElementById("message-input");
 if (messageForm != null) {
   const userName = prompt("What is your name?");
   appendMessage("You joined the room");
-  socket.emit("new-user", userName);
+  socket.emit("new-user", roomName, userName);
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
     appendMessage(`You: ${message}`);
-    socket.emit("send-chat-message", message);
+    socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
   });
 }
