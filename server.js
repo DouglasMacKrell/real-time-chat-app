@@ -8,7 +8,9 @@ const io = require('socket.io')(server, {
   },
 })
 
-app.set('views', './views')
+const port = Number(process.env.PORT) || 3000
+
+app.set("views", "./views");
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
@@ -36,7 +38,7 @@ app.get('/:room', (req, res) => {
   res.render('room', { roomName: req.params.room })
 })
 
-server.listen(3000)
+server.listen(port, () => console.log(`Server is running on port ${port}`));
 
 io.on('connection', socket => {
     socket.on('new-user', (room, userName) => {
