@@ -1,0 +1,9 @@
+[build]
+  base = "real-time-chat-app"
+  publish="/build"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.ejs"
+  status = 200
