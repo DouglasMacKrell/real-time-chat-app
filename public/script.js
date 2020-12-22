@@ -1,4 +1,4 @@
-const socket = io("https://dougs-real-time-chat-app.herokuapp.com/");
+const socket = io("Number(process.env.PORT) || 3000");
 
 const messageContainer = document.getElementById("message-container");
 const roomContainer = document.getElementById("room-container");
