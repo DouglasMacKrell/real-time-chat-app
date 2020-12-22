@@ -1,4 +1,4 @@
-const socket = io("http://localhost:3000");
+const socket = io("https://dougs-real-time-chat-app.herokuapp.com/");
 
 const messageContainer = document.getElementById("message-container");
 const roomContainer = document.getElementById("room-container");
