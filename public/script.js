@@ -22,7 +22,7 @@ if (messageForm != null) {
 }
 
 if (cleanForm != null) {
-  cleanButton.addEventListener("submit", (e) => {
+  cleanButton.addEventListener("click", (e) => {
     e.preventDefault();
     socket.emit("clear-rooms")
   })
