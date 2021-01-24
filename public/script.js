@@ -4,6 +4,7 @@ const messageContainer = document.getElementById("message-container");
 const roomContainer = document.getElementById("room-container");
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
+const cleanButton = document.getElementById("clean-button");
 
 if (messageForm != null) {
   const userName = prompt("What is your name?");
@@ -18,6 +19,11 @@ if (messageForm != null) {
     messageInput.value = "";
   });
 }
+
+cleanButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  socket.emit("clear-rooms")
+})
 
 socket.on('room-created', room => {
   const roomElement = document.createElement('div')

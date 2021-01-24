@@ -38,6 +38,10 @@ app.get('/:room', (req, res) => {
   res.render('room', { roomName: req.params.room })
 })
 
+app.get('/clean', (req, res) => {
+  res.render('clean')
+})
+
 server.listen(port, () => console.log(`Server is running on port ${port}`));
 
 io.on('connection', socket => {
@@ -54,6 +58,9 @@ io.on('connection', socket => {
         socket.to(room).broadcast.emit('user-disconnected', rooms[room].users[socket.id])
         delete rooms[room].users[socket.id]
       })
+    })
+    socket.on('clear-rooms', () => {
+      rooms = {}
     })
 })
 
