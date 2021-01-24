@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
   res.render('index', { rooms: rooms })
 })
 
+app.get("/clean", (req, res) => {
+  res.render("clean");
+});
+
 app.post('/room', (req, res) => {
   if (rooms[req.body.room] != null) {
     return res.redirect('/')
@@ -36,10 +40,6 @@ app.get('/:room', (req, res) => {
     return res.redirect("/")
   }
   res.render('room', { roomName: req.params.room })
-})
-
-app.get('/clean', (req, res) => {
-  res.render('clean')
 })
 
 server.listen(port, () => console.log(`Server is running on port ${port}`));
